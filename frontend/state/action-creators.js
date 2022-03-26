@@ -71,13 +71,13 @@ export function postQuiz({question_text, true_answer_text, false_answer_text}) {
     // - Dispatch the resetting of the form
     axios.post(`http://localhost:9000/api/quiz/new`, {question_text, true_answer_text, false_answer_text})
       .then(res => {
-        dispatch(setMessage(`${res.data.question_text} is a dandy question, baby`))
+        console.log(res)
         dispatch(resetForm())
+        dispatch(setMessage(`${res.data.question} is a dandy question, baby`))
       })
       .catch(err => {
         dispatch(setMessage(`You got to fill in the full question form, baby`))
       })
-    
   }
 }
 // ❗ On promise rejections, use log statements or breakpoints, and put an appropriate error message in state
