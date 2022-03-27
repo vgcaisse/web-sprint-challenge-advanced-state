@@ -23,9 +23,7 @@ export function setQuiz(question) {
 }
 
 export function inputChange(value) {
-  return {
-    type: actionTypes.INPUT_CHANGE, payload: value
-  }
+  return { type: actionTypes.INPUT_CHANGE, payload: value }
 }
 
 export function resetForm() {
@@ -43,6 +41,7 @@ export function fetchQuiz() {
     axios.get(`http://localhost:9000/api/quiz/next`)
       .then(res => {
         console.log(res)
+        dispatch(setQuiz(res.data))
       })
       .catch(err => {
         console.log({ err })
@@ -57,19 +56,20 @@ export function postAnswer({ quiz_id, answer_id }) {
     // - Dispatch the fetching of the next quiz
     axios.post(`http://localhost:9000/api/quiz/new`, { quiz_id, answer_id })
       .then(res => {
-        dispatch(selectAnswer())
-        dispatch(setQuiz())
+        console.log(res)
+        dispatch(selectAnswer(null))
+        dispatch(setQuiz(null))
         dispatch(fetchQuiz())
         dispatch(setMessage(res.data.message))
       })
   }
 }
-export function postQuiz({question_text, true_answer_text, false_answer_text}) {
+export function postQuiz({ question_text, true_answer_text, false_answer_text }) {
   return function (dispatch) {
     // On successful POST:
     // - Dispatch the correct message to the the appropriate state
     // - Dispatch the resetting of the form
-    axios.post(`http://localhost:9000/api/quiz/new`, {question_text, true_answer_text, false_answer_text})
+    axios.post(`http://localhost:9000/api/quiz/new`, { question_text, true_answer_text, false_answer_text })
       .then(res => {
         console.log(res)
         dispatch(resetForm())
