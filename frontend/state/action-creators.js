@@ -48,6 +48,7 @@ export function fetchQuiz() {
       })
   }
 }
+
 export function postAnswer({ quiz_id, answer_id }) {
   return function (dispatch) {
     // On successful POST:
@@ -57,8 +58,8 @@ export function postAnswer({ quiz_id, answer_id }) {
     axios.post(`http://localhost:9000/api/quiz/new`, { quiz_id, answer_id })
       .then(res => {
         console.log(res)
-        dispatch(selectAnswer(null))
-        dispatch(setQuiz(null))
+        dispatch(selectAnswer())
+        dispatch(setQuiz())
         dispatch(fetchQuiz())
         dispatch(setMessage(res.data.message))
       })

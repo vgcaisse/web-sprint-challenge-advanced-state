@@ -6,11 +6,11 @@ import { useEffect } from 'react'
 import * as actionCreators from '../state/action-creators'
 
 function Quiz(props) {
-  const { 
-    quiz, 
+  const {  
     fetchQuiz,
     postAnswer,
-    selectAnswer
+    selectAnswer,
+    quiz,
    } = props
 
   useEffect(() => {
@@ -40,19 +40,21 @@ function Quiz(props) {
             <h2>{quiz.question}</h2>
 
             <div id="quizAnswers">
-              <div className="answer selected">
+
+              <div className={`${props.selectedAnswer === quiz.answers[0].answer_id ? "answer selected" : "answer"}`}>
                 {quiz.answers[0].text}
                 <button onClick={() => onClick(quiz.answers[0].answer_id)}>
                   {props.selectedAnswer === quiz.answers[0].answer_id ? "SELECTED" : "Select"}
                 </button>
               </div>
 
-              <div className="answer">
+              <div className={`${props.selectedAnswer === quiz.answers[1].answer_id ? "answer selected" : "answer"}`}>
                 {quiz.answers[1].text}
                 <button onClick={() => onClick(quiz.answers[1].answer_id)}>
                   {props.selectedAnswer === quiz.answers[1].answer_id ? "SELECTED" : "Select"}
                 </button>
               </div>
+
             </div>
 
             <button id="submitAnswerBtn" onClick={handleSubmit}>Submit answer</button>
