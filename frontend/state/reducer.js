@@ -40,7 +40,7 @@ function selectedAnswer(state = initialSelectedAnswerState, action) {
   }
 }
 
-const initialMessageState = null
+const initialMessageState = ''
 function infoMessage(state = initialMessageState, action) {
   switch (action.type) {
     case actionTypes.SET_INFO_MESSAGE:

@@ -27,23 +27,25 @@ export function Form(props) {
     console.log(props.form)
   }
 
-  const isDisable = () => {
+  const isDisabled = () => {
     if (
-      props.form.newQuestion.trim('').length < 0 &&
-      props.form.newTrueAnswer.trim('').length < 0 &&
-      props.form.newFalseAnswer.trim('').length < 0
+      form.newQuestion.trim().length > 0 &&
+      form.newTrueAnswer.trim().length > 0 &&
+      form.newFalseAnswer.trim().length > 0
     ) {
+      return false
+    } else {
       return true
     }
   }
-
+  
   return (
     <form id="form" onSubmit={onSubmit}>
       <h2>Create New Quiz</h2>
       <input maxLength={50} onChange={onChange} id="newQuestion" value={form.newQuestion} placeholder="Enter question" />
       <input maxLength={50} onChange={onChange} id="newTrueAnswer" value={form.newTrueAnswer} placeholder="Enter true answer" />
       <input maxLength={50} onChange={onChange} id="newFalseAnswer" value={form.newFalseAnswer} placeholder="Enter false answer" />
-      <button id="submitNewQuizBtn" disabled={isDisable}>Submit new quiz</button>
+      <button id="submitNewQuizBtn" disabled={isDisabled()}>Submit new quiz</button>
     </form>
   )
 }

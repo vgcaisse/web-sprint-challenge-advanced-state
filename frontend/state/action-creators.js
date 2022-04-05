@@ -55,13 +55,15 @@ export function postAnswer({ quiz_id, answer_id }) {
     // - Dispatch an action to reset the selected answer state
     // - Dispatch an action to set the server message to state
     // - Dispatch the fetching of the next quiz
-    axios.post(`http://localhost:9000/api/quiz/new`, { quiz_id, answer_id })
+    console.log(answer_id)
+    axios.post(`http://localhost:9000/api/quiz/answer`, { quiz_id, answer_id })
       .then(res => {
-        console.log(res)
-        dispatch(selectAnswer())
-        dispatch(setQuiz())
+        // console.log(res)
         dispatch(fetchQuiz())
         dispatch(setMessage(res.data.message))
+      })
+      .catch(err => {
+        console.log({err})
       })
   }
 }
@@ -74,10 +76,10 @@ export function postQuiz({ question_text, true_answer_text, false_answer_text })
       .then(res => {
         console.log(res)
         dispatch(resetForm())
-        dispatch(setMessage(`${res.data.question} is a dandy question, baby`))
+        dispatch(setMessage(`${res.data.question} is a dandy question`))
       })
-      .catch(err => {
-        dispatch(setMessage(`You got to fill in the full question form, baby`))
+      .catch(res => {
+        dispatch(setMessage(res.data.message))
       })
   }
 }

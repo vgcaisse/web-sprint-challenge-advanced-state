@@ -15,7 +15,7 @@ function Quiz(props) {
 
   useEffect(() => {
     fetchQuiz()
-    console.log(fetchQuiz)
+    // console.log(fetchQuiz)
   }, [])
 
   const handleSubmit = evt => {
@@ -26,10 +26,20 @@ function Quiz(props) {
     })
   }
 
-  const onClick = (id) => {
+  const handleClick = (id) => {
     selectAnswer(id)
-    console.log(id)
+    // console.log(props)
   }
+
+  const isDisabled = () => {
+    if ( quiz.answers.answer_id === null ) {
+      return true
+    } else {
+      return false
+    }
+  }
+
+  console.log(props.selectedAnswer)
 
   return (
     <div id="wrapper">
@@ -43,21 +53,21 @@ function Quiz(props) {
 
               <div className={`${props.selectedAnswer === quiz.answers[0].answer_id ? "answer selected" : "answer"}`}>
                 {quiz.answers[0].text}
-                <button onClick={() => onClick(quiz.answers[0].answer_id)}>
+                <button onClick={() => handleClick(quiz.answers[0].answer_id)}>
                   {props.selectedAnswer === quiz.answers[0].answer_id ? "SELECTED" : "Select"}
                 </button>
               </div>
 
               <div className={`${props.selectedAnswer === quiz.answers[1].answer_id ? "answer selected" : "answer"}`}>
                 {quiz.answers[1].text}
-                <button onClick={() => onClick(quiz.answers[1].answer_id)}>
+                <button onClick={() => handleClick(quiz.answers[1].answer_id)}>
                   {props.selectedAnswer === quiz.answers[1].answer_id ? "SELECTED" : "Select"}
                 </button>
               </div>
 
             </div>
 
-            <button id="submitAnswerBtn" onClick={handleSubmit}>Submit answer</button>
+            <button id="submitAnswerBtn" onClick={handleSubmit} disabled={isDisabled()}>Submit answer</button>
           </>
         ) : 'Loading next quiz...'
       }
