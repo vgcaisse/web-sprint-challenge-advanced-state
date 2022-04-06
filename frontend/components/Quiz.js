@@ -15,7 +15,7 @@ function Quiz(props) {
 
   useEffect(() => {
     fetchQuiz()
-    // console.log(fetchQuiz)
+    console.log(props.selectedAnswer)
   }, [])
 
   const handleSubmit = evt => {
@@ -32,14 +32,14 @@ function Quiz(props) {
   }
 
   const isDisabled = () => {
-    if ( quiz.answers.answer_id === null ) {
+    if ( props.selectedAnswer === null ) {
       return true
     } else {
       return false
     }
   }
 
-  console.log(props.selectedAnswer)
+  // console.log(props.selectedAnswer)
 
   return (
     <div id="wrapper">

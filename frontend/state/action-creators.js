@@ -76,7 +76,7 @@ export function postQuiz({ question_text, true_answer_text, false_answer_text })
       .then(res => {
         console.log(res)
         dispatch(resetForm())
-        dispatch(setMessage(`${res.data.question} is a dandy question`))
+        dispatch(setMessage(`Congrats: "${res.data.question}" is a great question!`))
       })
       .catch(res => {
         dispatch(setMessage(res.data.message))
